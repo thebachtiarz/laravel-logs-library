@@ -41,6 +41,7 @@ class UserFactoryServices
                 ->isActive(self::$isActive)
                 ->hasUserBio()
                 ->hasUserStat()
+                ->hasUserLog(1, fn () => ['log_code' => '1', 'log_type' => 'success', 'log_message' => 'Auth active registered'])
                 ->create();
             self::$status = true;
         } catch (\Throwable $th) {
