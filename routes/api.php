@@ -17,3 +17,28 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'user'], function () {
+    Route::post('/log', function () {
+        $setLog = \App\Services\Logs\UserLogServices::setUserId(request('userid'))
+            ->setLogCode(request('logcode'))
+            ->setLogType(request('logtype'))
+            ->setLogMessage(request('logmessage'))
+            ->processGetResult();
+        return response()->json($setLog, $setLog['is_success'] ? 201 : 202);
+    });
+});
+
+Route::group(['prefix' => 'factory'], function () {
+    Route::post('/user', function () {
+        return \App\Services\Factories\UserFactoryServices::setCount(request('count'))
+            ->setActive(request('active'))
+            ->generate();
+    });
+    Route::post('/logmng', function () {
+        return \App\Services\Factories\LogMngFactoryServices::setNametype(request('nametype'))
+            ->setAltcode(request('altcode'))
+            ->setDescription(request('description'))
+            ->saveLog();
+    });
+});

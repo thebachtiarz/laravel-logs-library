@@ -17,9 +17,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
+        'is_active',
     ];
 
     /**
@@ -40,4 +40,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // ? Relation
+
+    public function userbio()
+    {
+        return $this->hasMany(\App\Models\Auth\UserBiodata::class, 'user_id');
+    }
+
+    public function userbiolatest()
+    {
+        return $this->hasMany(\App\Models\Auth\UserBiodata::class, 'user_id')->latest()->first();
+    }
+
+    public function userstat()
+    {
+        return $this->hasOne(\App\Models\Auth\UserStatus::class, 'user_id');
+    }
+
+    public function userlog()
+    {
+        return $this->hasMany(\App\Models\Logs\UserLog::class, 'user_id');
+    }
 }
