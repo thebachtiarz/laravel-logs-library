@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            ApiKeyMngSeeder::class,
             LogManagementSeeder::class,
             UserFactorySeeder::class
         ]);

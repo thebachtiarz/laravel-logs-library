@@ -15,7 +15,8 @@ class CreateUserStatusesTable extends Migration
     {
         Schema::create('user_statuses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Auth\User::class)->constrained();
             $table->string('status');
             $table->timestamps();
         });
