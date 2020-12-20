@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\Access\AppApiKeyManagementService;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/header', function () {
+    return request()->header();
+})->middleware('apikey');

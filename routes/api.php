@@ -30,17 +30,26 @@ Route::group(['prefix' => 'user'], function () {
 });
 
 Route::group(['prefix' => 'factory'], function () {
-    Route::post('/user', function () {
-        $setUser = \App\Services\Factories\UserFactoryServices::setCount(request('count'))
-            ->setActive(request('active'))
-            ->generate();
-        return response()->json($setUser, $setUser['is_success'] ? 201 : 202);
-    });
     Route::post('/logmng', function () {
         $newLog = \App\Services\Factories\LogMngFactoryServices::setNametype(request('nametype'))
             ->setAltcode(request('altcode'))
             ->setDescription(request('description'))
             ->saveLog();
         return response()->json($newLog, $newLog['is_success'] ? 201 : 202);
+    });
+
+    Route::post('/user', function () {
+        $setUser = \App\Services\Factories\UserFactoryServices::setCount(request('count'))
+            ->setActive(request('active'))
+            ->generate();
+        return response()->json($setUser, $setUser['is_success'] ? 201 : 202);
+    });
+
+    Route::post('/apikey', function () {
+        $newapi = \App\Services\Factories\AppApiKeyFactoryServices::setCount(request('count'))
+            ->setHours(request('hours'))
+            ->setActive(request('active'))
+            ->generateGetResult();
+        return response()->json($newapi, $newapi['is_success'] ? 201 : 202);
     });
 });

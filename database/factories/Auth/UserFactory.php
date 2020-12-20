@@ -36,10 +36,6 @@ class UserFactory extends Factory
 
     public function isActive(bool $active = true)
     {
-        return $this->state(function () use ($active) {
-            return [
-                'is_active' => $active
-            ];
-        });
+        return $this->state(fn () => ['is_active' => $active]);
     }
 }
