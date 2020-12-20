@@ -31,14 +31,16 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::group(['prefix' => 'factory'], function () {
     Route::post('/user', function () {
-        return \App\Services\Factories\UserFactoryServices::setCount(request('count'))
+        $setUser = \App\Services\Factories\UserFactoryServices::setCount(request('count'))
             ->setActive(request('active'))
             ->generate();
+        return response()->json($setUser, $setUser['is_success'] ? 201 : 202);
     });
     Route::post('/logmng', function () {
-        return \App\Services\Factories\LogMngFactoryServices::setNametype(request('nametype'))
+        $newLog = \App\Services\Factories\LogMngFactoryServices::setNametype(request('nametype'))
             ->setAltcode(request('altcode'))
             ->setDescription(request('description'))
             ->saveLog();
+        return response()->json($newLog, $newLog['is_success'] ? 201 : 202);
     });
 });

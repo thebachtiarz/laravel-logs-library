@@ -18,7 +18,7 @@ class CreateUserLogsTable extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('log_code')->constrained('log_management')->cascadeOnDelete();
             $table->string('log_type');
-            $table->string('log_message');
+            $table->text('log_message');
             $table->timestamps();
         });
     }

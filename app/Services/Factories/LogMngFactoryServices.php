@@ -2,7 +2,7 @@
 
 namespace App\Services\Factories;
 
-use App\Models\Logs\LogManagement; // ? ['name_type', 'alt_code', 'description']
+use App\Models\Logs\LogManagement;
 
 class LogMngFactoryServices
 {
@@ -48,7 +48,7 @@ class LogMngFactoryServices
         ];
     }
 
-    // ? result message
+    // ? Result Message
     private static function successResult()
     {
         return [

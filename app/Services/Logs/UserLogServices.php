@@ -15,8 +15,8 @@ class UserLogServices
     protected static array $logGenerate;
     protected static bool $logresult = false;
 
-    protected static $userData;
-    protected static $logsData;
+    protected static object $userData;
+    protected static object $logsData;
 
     // ? Public Method
     public static function process()
@@ -98,7 +98,7 @@ class UserLogServices
         ];
     }
 
-    // ? result message
+    // ? Result Message
     private static function successResult()
     {
         return [
